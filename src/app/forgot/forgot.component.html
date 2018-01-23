@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ 'FORGOT.TITLE' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+    
+<ion-content padding class="auth-content">
+  <form class="auth-form" [formGroup]="forgot">
+    <p translate>FORGOT.PAGETEXT</p>
+    <ion-list>
+      <ion-item>
+        <ion-label floating>{{ 'FORGOT.LABEL' | translate }}</ion-label>
+        <ion-input type="text" formControlName="username" placeholder="{{ 'FORGOT.PLACEHOLDER' | translate }}"></ion-input>
+      </ion-item>
+      <div class="form-error-message" *ngIf="forgot.controls.username.errors && forgot.controls.username.value">
+        Must be between 4 and 30 characters.
+      </div>      
+    </ion-list>
+  </form>
+</ion-content>
+
+<ion-footer no-border>
+    <ion-toolbar>
+        <button ion-button round block (click)="resetPassword()" [disabled]="!forgot.valid">{{ 'FORGOT.BUTTON' | translate }}</button>
+    </ion-toolbar>
+</ion-footer>

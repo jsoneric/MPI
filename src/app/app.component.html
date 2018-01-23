@@ -1,0 +1,20 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <div>
+      <ion-icon name="contact"></ion-icon>
+      <h2>{{ owner.first_name }} {{ owner.last_name }}</h2>
+    </div>
+  </ion-header>
+
+  <ion-content class="menu-content">
+    <ion-list class="menu-list">
+      <ion-item no-lines menuClose ion-item *ngFor="let page of Components" (click)="openComponent(page)">
+        <ion-icon name="{{ page.icon }}" item-left></ion-icon>
+        {{ page.title }}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootComponent" #content swipeBackEnabled="false"></ion-nav>

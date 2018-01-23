@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Permit Details</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="wrapper">
+        <span class="cost">
+            ${{ permit.type.cost }}.00
+        </span>
+        <div class="title">
+            {{ permit.type.name }}
+        </div>
+        <div class="dates">
+            {{ permit.create_date | date: "M/dd/yy" }}—{{ permit.valid_end_date | date: "M/dd/yy" }}
+        </div>
+        <ion-badge>{{ permit.type.max_vehicles }}</ion-badge> vehicle(s) allowed
+    </div>  
+
+    <h2>Vehicles</h2>
+
+    <ion-list>
+        <ion-item no-lines *ngFor="let vehicle of permitVehicles">
+            <ion-label>{{ vehicle.alias }}</ion-label>
+            <ion-checkbox 
+                [disabled]="(maxVehiclesSelected && !vehicle.checked)"
+                (click)="checkboxClicked()"
+                [(ngModel)]="vehicle.checked"
+                value="vehicle.checked">
+            </ion-checkbox>
+        </ion-item>
+    </ion-list>
+</ion-content>
+
+<ion-footer no-border>
+    <ion-toolbar>
+        <button ion-button round color="danger" (click)="cancel()">Cancel</button>
+        <button ion-button round (click)="saveEdits()">Save Edits</button>
+    </ion-toolbar>
+</ion-footer>

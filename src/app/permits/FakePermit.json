@@ -1,0 +1,92 @@
+{
+  "mpermit_id": 255,
+  "owner_id": 12,
+  "permit_number": "PRV00001058",
+  "status": "Pending",
+  "mpermit_type_id": 24,
+  "valid_start_date": "Apr 10, 2017 12:00:00 PM",
+  "valid_end_date": "Apr 11, 2017 11:59:59 PM",
+  "create_date": "Apr 10, 2017 3:21:12 PM",
+  "update_date": "Apr 10, 2017 3:21:12 PM",
+  "space": 0,
+  "permit_type": {
+    "mpermit_type_id": 24,
+    "name": "Visitor",
+    "description": "10 day visitor permit",
+    "max_vehicles": 2,
+    "max_concurrent": 0,
+    "max_issued": 0,
+    "period_type": "relative",
+    "renewable": 0,
+    "period_days": 1,
+    "space_start": 0,
+    "space_end": 0,
+    "max_minutes": 0,
+    "cost": 0,
+    "requires_shipping": 0,
+    "can_pickup": 0,
+    "can_print": 1,
+    "permit_type_attributes": [
+      {
+        "mpermit_type_attr_id": 1,
+        "mpermit_type_id": 24,
+        "name": "Semester",
+        "value": "Fall"
+      }
+    ],
+    "privileges": [
+      {
+        "type": "privilege",
+        "codeid": "26AG",
+        "description": "26AG",
+        "citation_type_id": 0,
+        "is_overtime": 0,
+        "is_other": 0,
+        "uuid": "53e0bbab-...."
+      }
+    ],
+    "expire_notice_days": 0
+  },
+  "privileges": [
+    {
+      "type": "privilege",
+      "codeid": "26AG",
+      "description": "26AG",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "53e0bbab-...."
+    }
+  ],
+  "vehicles": [
+    {
+      "vehicle_id": 66,
+      "owner_id": 12,
+      "license": "test123",
+      "vin": "",
+      "make_id": "ACUR",
+      "color_id": "AME",
+      "state_id": "AK",
+      "create_date": "Apr 14, 2017 9:09:39 AM",
+      "update_date": "Apr 14, 2017 9:09:39 AM",
+      "alias": "GoGoGo",
+      "type": "Car",
+      "vehicle_attributes": [
+        {
+          "vehicle_attr_id": 4,
+          "vehicle_id": 66,
+          "name": "size",
+          "value": "Huuuge"
+        }
+      ]
+    }
+  ],
+  "permit_attributes": [
+    {
+      "mpermit_attr_id": 1,
+      "mpermit_id": 24,
+      "name": "something",
+      "value": "else"
+    }
+  ]
+}

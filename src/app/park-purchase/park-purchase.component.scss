@@ -1,0 +1,53 @@
+pbm-park-purchase {
+    .title-wrapper {
+        background: #EDEDED;
+        box-shadow: inset 0 1px 2px 0 rgba(0,0,0,0.50);
+        margin-left: -16px;
+        margin-top: -16px;
+        padding: 20px 15px;
+        width: 110%;
+
+        .permit-title {
+            font-size: 16px;
+            margin-bottom: 3px;
+        }
+
+        .permit-type {
+            font-size: 14px;
+        }
+    }
+
+    .item {
+        padding-left: 0;
+
+        &.cost {
+            padding-left: 16px;
+        }
+    }
+
+    .park-button {
+        margin-top: 30px;
+        @include call-to-action-button-styles(color($colors, button, base), color($colors, button, contrast));
+    }
+
+    .parking-space-wrapper {
+        margin-bottom: 4px;
+    }
+
+    .parking-spot-search-button {
+        margin: 34px 0 0 25px;
+    }
+
+    ion-toolbar {
+        text-align: center;
+
+        .toolbar-background-md {
+            border: 0px;
+            background: #ffffff;
+        }
+
+        button {
+            min-width: 128px;
+        }
+    }
+}

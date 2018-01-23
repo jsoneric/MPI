@@ -1,0 +1,53 @@
+pbm-vehicles-details {
+    .item {
+        padding-left: 0;
+    }
+
+    .vehicle-details-button-wrapper {
+        margin-top: 30px;
+
+        button {
+            width: 48%;
+        }
+    }
+
+    .add-vehicle-button-wrapper {
+        margin-top: 30px;
+    }
+
+    .vin-wrapper {
+        display: block;
+        position: relative;
+
+        .scan-button {
+            color: $black-d;
+            height: 4.4rem;
+            margin: 0px;
+            padding: 0px 6px;
+            position: absolute;
+            right: 1px;
+            text-align: right;
+            top: 25px;
+            width: 6rem;
+
+            ion-icon {
+                height: 4.4rem;
+                line-height: 4.4rem;
+                font-size: 2.4rem;
+            }
+        }    
+    }
+
+    ion-toolbar {
+        text-align: center;
+
+        .toolbar-background-md {
+            border: 0px;
+            background: #ffffff;
+        }
+
+        button {
+            min-width: 128px;
+        }
+    }    
+}

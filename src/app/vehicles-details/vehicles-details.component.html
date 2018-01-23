@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ pageTitle }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="vehicleDetails">
+    <ion-item>
+      <ion-label floating>{{ 'VEHICLEDETAILS.LABELS.NICKNAME' | translate }}</ion-label>
+      <ion-input type="text" formControlName="alias" placeholder="" [(ngModel)]="thisVehicle.alias" (blur)="setAsTouched()"></ion-input>
+    </ion-item>
+    <div class="form-error-message" *ngIf="vehicleDetails.controls.alias.errors && vehicleDetails.controls.alias.value">
+        Must be between 4 and 30 characters.
+    </div>
+
+    <ion-item>
+      <ion-label floating>{{ 'VEHICLEDETAILS.LABELS.LICENSEPLATE' | translate }}</ion-label>
+      <ion-input type="text" formControlName="license" placeholder="" [(ngModel)]="thisVehicle.license" [pbm-uppercase] (blur)="setAsTouched()"></ion-input>
+    </ion-item>
+    <div class="form-error-message" *ngIf="vehicleDetails.controls.license.errors && vehicleDetails.controls.license.value">
+        Must be between 4 and 30 characters.
+    </div>
+
+    <ion-item>
+      <ion-label floating>{{ 'VEHICLEDETAILS.LABELS.LICENSESTATE' | translate }}</ion-label>
+      <ion-select formControlName="state" placeholder="" [multiple]="false" [(ngModel)]="thisVehicle.state_id" interface="popover">
+        <ion-option *ngFor="let state of states" value="{{ state.codeid }}">{{ state.description }}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>{{ 'VEHICLEDETAILS.LABELS.VEHICLETYPE' | translate }}</ion-label>
+      <ion-select formControlName="type" placeholder="" [(ngModel)]="thisVehicle.type" interface="popover">
+        <ion-option *ngFor="let type of vehicleTypes" value="{{ type.vehicle_class_id }}">{{ type.name }}</ion-option>
+      </ion-select>
+    </ion-item>
+    <!--
+    These fields are not going to have an endpoint to populate them until after 2.2, so they are commented out for now
+    <ion-item *ngIf="thisVehicle.vehicle_id != 0">
+      <ion-label floating>{{ 'VEHICLEDETAILS.LABELS.VEHICLEMAKE' | translate }}</ion-label>
+      <ion-select>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="thisVehicle.vehicle_id != 0">
+      <ion-label floating>{{ 'VEHICLEDETAILS.LABELS.VEHICLECOLOR' | translate }}</ion-label>
+      <ion-input type="url"></ion-input>
+    </ion-item>-->
+    <div *ngIf="thisVehicle.vehicle_id != 0" class="vin-wrapper">
+      <ion-item>
+        <ion-label floating>{{ 'VEHICLEDETAILS.LABELS.VEHICLEVIN' | translate }}</ion-label>
+        <ion-input type="text" formControlName="vin" placeholder="" [(ngModel)]="thisVehicle.vin"></ion-input>
+      </ion-item>
+      <a class="scan-button" (click)="scan()">
+        <ion-icon name="ios-barcode-outline"></ion-icon>
+      </a>
+    </div>
+  </form>
+</ion-content>
+
+<ion-footer no-border>      
+  <ion-toolbar>
+    <div *ngIf="thisVehicle.vehicle_id != 0" class="vehicle-details-button-wrapper">
+      <button ion-button round color="danger" (click)="deleteVehicle()">{{ 'VEHICLEDETAILS.BUTTONS.ACTIONBUTTONS.DELETEVEHICLE' | translate }}</button>
+      <button ion-button round [disabled]="!vehicleDetails.valid" (click)="save()">{{ 'VEHICLEDETAILS.BUTTONS.ACTIONBUTTONS.SAVEEDITS' | translate }}</button>
+    </div>
+    <div *ngIf="thisVehicle.vehicle_id == 0" class="add-vehicle-button-wrapper">
+      <button ion-button block round [disabled]="!vehicleDetails.valid" (click)="save()">{{ 'VEHICLEDETAILS.BUTTONS.ACTIONBUTTONS.SAVEVEHICLE' | translate }}</button>
+    </div>
+  </ion-toolbar>  
+</ion-footer>

@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Permits</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="content">
+  <div class="list-wrapper">
+    <ion-list *ngFor="let permit of permits">
+      <button 
+        (click)="editPermit(permit)"
+        class="list-item item item-block item-md">
+        <ion-row no-padding class="content-row one-line">
+         
+          <ion-col no-padding>
+            <ion-icon name="pricetag"></ion-icon>
+          </ion-col>
+          
+          <ion-col no-padding class="item-content">
+            <h3 class="item-title">{{ permit.type.name }}</h3>
+            <p class="item-description">
+              <span>{{ permit.valid_start_date | date: "M/dd/yy" }}</span>—<span>{{ permit.valid_end_date | date: "M/dd/yy" }}</span>
+            </p>  
+          </ion-col>
+        
+        </ion-row>
+      </button>
+    </ion-list>
+  </div>
+</ion-content>
+
+<ion-fab right bottom>
+  <button ion-fab (click)="addNewPermit()">
+    <ion-icon name="add"></ion-icon>
+  </button>
+</ion-fab>

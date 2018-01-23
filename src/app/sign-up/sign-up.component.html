@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ 'SIGNUP.TITLE' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding class="auth-content">
+  <form class="auth-form" [formGroup]="signup">
+    <ion-list>
+      <ion-item id="ionItem">
+        <ion-label floating>{{ 'SIGNUP.LABELS.FIRSTNAME' | translate }}</ion-label>
+        <ion-input id="foo" type="text" formControlName="first_name" placeholder="" [(ngModel)]="signup.first_name" (blur)="setAsTouched()"></ion-input>
+      </ion-item>
+      <div class="form-error-message" *ngIf="signup.controls.first_name.errors && signup.controls.first_name.value">
+        Must be between 2 and 30 characters.
+      </div>
+
+      <ion-item>
+        <ion-label floating>{{ 'SIGNUP.LABELS.LASTNAME' | translate }}</ion-label>
+        <ion-input type="text" formControlName="last_name" placeholder="" [(ngModel)]="signup.last_name" (blur)="setAsTouched()"></ion-input>
+      </ion-item>
+      <div class="form-error-message" *ngIf="signup.controls.last_name.errors && signup.controls.last_name.value">
+        Must be between 2 and 30 characters.
+      </div>
+
+      <ion-item>
+        <ion-label floating>{{ 'SIGNUP.LABELS.EMAIL' | translate }}</ion-label>
+        <ion-input type="email" formControlName="email" placeholder="" [(ngModel)]="signup.email" (blur)="setAsTouched()"></ion-input>
+      </ion-item>
+      <div class="form-error-message" *ngIf="signup.controls.email.errors && signup.controls.email.value">
+        Not a valid email address.
+      </div>
+
+      <ion-item>
+        <ion-label floating>{{ 'SIGNUP.LABELS.USERNAME' | translate }}</ion-label>
+        <ion-input type="text" formControlName="username" placeholder="" [(ngModel)]="signup.username" (blur)="setAsTouched()"></ion-input>
+      </ion-item>
+      <div class="form-error-message" *ngIf="signup.controls.username.errors && signup.controls.username.value">
+        Must be between 4 and 30 characters.
+      </div>
+
+      <pbm-show-hide-container>
+        <ion-item>
+          <ion-label floating>{{ 'SIGNUP.LABELS.PASSWORD' | translate }}</ion-label>
+          <ion-input type="password" formControlName="password" placeholder="" [(ngModel)]="signup.password" pbmShowHideInput (blur)="setAsTouched()"></ion-input>
+        </ion-item>
+      </pbm-show-hide-container>   
+      <div class="form-error-message" *ngIf="signup.controls.password.errors && signup.controls.password.value">
+        Must be between 6 and 30 characters.
+      </div>
+
+      <pbm-show-hide-container>
+        <ion-item>
+          <ion-label floating>{{ 'SIGNUP.LABELS.CONFIRM' | translate }}</ion-label>
+          <ion-input type="password" formControlName="confirm_password" placeholder="" [(ngModel)]="signup.confirm_password" pbmShowHideInput (blur)="setAsTouched()"></ion-input>
+        </ion-item>
+      </pbm-show-hide-container>   
+      <div class="form-error-message" *ngIf="signup.hasError('mismatchedPasswords') && signup.controls.confirm_password.dirty">
+        Does not match password.
+      </div>
+
+    </ion-list>
+  </form>
+</ion-content>
+
+<ion-footer no-border>
+    <ion-toolbar>
+        <button ion-button round block [disabled]="!signup.valid" (click)="signUpAccount()">{{ 'SIGNUP.BUTTON' | translate }}</button>
+    </ion-toolbar>
+</ion-footer>

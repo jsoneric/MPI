@@ -1,0 +1,2192 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "A delightful application to help you pay for your parking when you want instead of waiting in a line.",
+    "version": "1.0.0",
+    "title": "Mobile Pay",
+    "termsOfService": "http://paylock.com/terms",
+    "contact": {
+      "name": "PayLock Engineering",
+      "email": "engineers@paylock.com"
+    },
+    "license": {
+      "name": "PayLock IPT, LLC",
+      "url": "http://www.paylock.com/license"
+    }
+  },
+  "host": "demo.citewriteit.com",
+  "basePath": "/cws/parkbynexus",
+  "tags" : [
+    {
+      "name":"owner",
+      "description":"Operations about the Owner"
+    },
+    {
+      "name":"vehicle",
+      "description":"Everything pertaining to your Vehicles"
+    },
+    {
+      "name":"permit",
+      "description":"Everything pertaining to your Permits"
+    },
+    {
+      "name":"lot",
+      "description":"A Lot where a Permit may be applied"
+    },
+    {
+      "name":"card",
+      "description":"A credit card belonging to the Owner"
+    },
+    {
+      "name":"permit_type",
+      "description":"The Type of Permit"
+    },
+    {
+      "name":"vehicle_type",
+      "description":"The Type of Vehicle for a specific Vehicle"
+    },
+    {
+      "name":"privilege",
+      "description":"The Privileges for a Permit"
+    },
+    {
+      "name":"state",
+      "description":"The State where your Vehicle is registered"
+    },
+    {
+      "name":"park",
+      "description":"Everything pertaining to parking lots and spaces"
+    }
+  ],
+  "schemes" : [
+    "http"
+  ],
+  "paths" : {
+    "/owner/deleteCard" : {
+      "post": {
+        "tags" : [
+          "card"
+        ],
+        "summary" : "Delete a Card for a specific Owner",
+        "description":"",
+        "operationId":"deleteCard",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "in":"query",
+            "name":"cc_storage_id",
+            "required": true,
+            "type": "integer",
+            "format" : "int64",
+            "description":"The ID of the Card to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                }
+              },
+              "xml" : {
+                "name" : "DeleteCard"
+              }
+            }
+          },
+          "400" : {
+            "description": "Invalid Card"
+          },
+          "404" : {
+            "description": "Card not found"
+          }
+        },
+        "security":[
+          {"apiKey": []}
+        ]
+      }
+    },
+    "/owner/storeCard" : {
+      "post": {
+        "tags" : [
+          "card"
+        ],
+        "summary" : "Store a new Card",
+        "description":"Stores a Card for the Owner",
+        "operationId":"storeCard",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Card object that needs to be added to the Owner",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Card"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success",
+                "card"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                },
+                "card" : {
+                  "$ref": "#/definitions/Card"
+                }
+              },
+              "xml" : {
+                "name" : "StoreCard"
+              }
+            }
+          },
+          "400" : {
+            "description": "Invalid Card"
+          },
+          "404" : {
+            "description": "Card not found"
+          }
+        },
+        "security":[
+          {"apiKey": []}
+        ]
+      }
+    },
+    "/permit/purchase" : {
+      "post": {
+        "tags" : [
+          "permit", "park"
+        ],
+        "summary" : "Permit Purchase",
+        "description":"Purchase a Permit Type for a Vehicle using a Card",
+        "operationId":"purchasePermit",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "name": "mpermit-type-id",
+            "in": "query",
+            "description": "The ID of the Permit Type",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "mpermit-vehicle-list",
+            "in": "query",
+            "description": "The Vehicles to apply this Permit Type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cc_storage_id",
+            "in": "query",
+            "description": "The ID of the Card",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "space",
+            "in": "query",
+            "description": "The space the",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "metered-time-id",
+            "in": "query",
+            "description": "The ID of the Time object",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                },
+                "permit" : {
+                  "$ref": "#/definitions/Permit"
+                }
+              },
+              "xml" : {
+                "name" : "PurchasePermit"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected Error",
+            "schema" : {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security":[
+          {"apiKey": []}
+        ]
+      }
+    },
+    "/permit/purchaseTime" : {
+      "post": {
+        "tags" : [
+          "permit", "park"
+        ],
+        "summary" : "Purchase Time",
+        "description":"Purchase Time for your Permit",
+        "operationId":"purchasePermitTime",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "name": "mpermit-id",
+            "in": "query",
+            "description": "The ID for the Permit",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "cc_storage_id",
+            "in": "query",
+            "description": "The ID of the Card",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "space",
+            "in": "query",
+            "description": "The space the Vehicle will be parked",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "metered-time-id",
+            "in": "query",
+            "description": "The ID of the Time object",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success",
+                "permit"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                },
+                "permit": {
+                  "$ref": "#/definitions/Permit"
+                }
+              },
+              "xml" : {
+                "name" : "PurchaseTime"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected Error",
+            "schema" : {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security":[
+          {"apiKey": []}
+        ]
+      }
+    },
+    "/list/all" : {
+      "get": {
+        "tags" : [
+          "lot", "vehicle_type", "state"
+        ],
+        "summary" : "List All",
+        "description":"List all Lots, States, and VehicleTypes",
+        "operationId":"listALl",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success",
+                "lots",
+                "states",
+                "vehicle_types"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                },
+                "lots" : {
+                  "type" : "array",
+                  "items": {
+                    "$ref" : "#/definitions/Lot"
+                  },
+                  "xml" : {
+                    "name": "lot",
+                    "wrapped": true
+                  }
+                },
+                "states": {
+                  "type" : "array",
+                  "items": {
+                    "$ref" : "#/definitions/State"
+                  },
+                  "xml" : {
+                    "name": "state",
+                    "wrapped": true
+                  }
+                } ,
+                "vehicle_types": {
+                  "type" : "array",
+                  "items": {
+                    "$ref" : "#/definitions/VehicleType"
+                  },
+                  "xml" : {
+                    "name": "vehicle_type",
+                    "wrapped": true
+                  }
+                }
+              },
+              "xml" : {
+                "name" : "ListAll"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected Error",
+            "schema" : {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security":[]
+      }
+    },
+    "/vehicle/delete" : {
+      "post": {
+        "tags" : [
+          "vehicle"
+        ],
+        "summary" : "Delete Vehicle",
+        "description":"Delete a Vehicle object for the Owner",
+        "operationId":"deleteVehicle",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "name": "vehicle_id",
+            "in": "query",
+            "description": "The id of the vehicle to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                }
+              },
+              "xml" : {
+                "name" : "DeleteVehicle"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected Error",
+            "schema" : {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security":[
+          {"apiKey": []}
+        ]
+      }
+    },
+    "/vehicle/save" : {
+      "post": {
+        "tags" : [
+          "vehicle"
+        ],
+        "summary" : "Save Vehicle",
+        "description":"Save a Vehicle object for the Owner",
+        "operationId":"saveVehicle",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Vehicle object that needs to be added to the Owner",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Vehicle"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success",
+                "vehicle"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                },
+                "vehicle" : {
+                  "$ref": "#/definitions/Vehicle"
+                }
+              },
+              "xml" : {
+                "name" : "SaveVehicle"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected Error",
+            "schema" : {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security":[
+          {"apiKey": []}
+        ]
+      }
+    },
+    "/doLogin" : {
+      "post": {
+        "tags" : [
+          "owner"
+        ],
+        "summary" : "Login",
+        "description":"Login an Owner",
+        "operationId":"OwnerLogin",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "name": "j_username",
+            "in": "query",
+            "description": "The user name for login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "j_password",
+            "in": "query",
+            "description": "The password for login in clear text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success",
+                "owner",
+                "vehicles"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                },
+                "owner" : {
+                  "$ref": "#/definitions/Owner"
+                },
+                "vehicles" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref": "#/definitions/Vehicle"
+                  },
+                  "xml" : {
+                    "name": "vehicle",
+                    "wrapped": true
+                  }
+                }
+              },
+              "xml" : {
+                "name" : "OwnerLogin"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected Error",
+            "schema" : {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security":[]
+      }
+    },
+    "/owner/details" : {
+      "post": {
+        "tags" : [
+          "owner"
+        ],
+        "summary" : "Owner Details",
+        "description":"An API call to return the Owner, its Permits, and Vehicles",
+        "operationId":"postOwnerDetails",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success",
+                "owner",
+                "permits",
+                "vehicles"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                },
+                "owner" : {
+                  "$ref": "#/definitions/Owner"
+                },
+                "permits" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref": "#/definitions/Permit"
+                  },
+                  "xml" : {
+                    "name" : "permit",
+                    "wrapped": true
+                  }
+                },
+                "vehicles" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref": "#/definitions/Vehicle"
+                  },
+                  "xml" : {
+                    "name" : "vehicle",
+                    "wrapped": true
+                  }
+                }
+              },
+              "xml" : {
+                "name" : "OwnerDetails"
+              }
+            }
+          },
+          "400" : {
+            "description": "Invalid Owner"
+          },
+          "404" : {
+            "description": "Owner Details not found"
+          }
+        },
+        "security":[
+          {"apiKey" : []}
+        ]
+      }
+    },
+    "/owner/password" : {
+      "post": {
+        "tags" : [
+          "owner"
+        ],
+        "summary" : "Change Password",
+        "description":"Change the password of an Owner",
+        "operationId":"resetOwnerPassword",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "in": "query",
+            "name": "username",
+            "description": "The username of the Owner",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success",
+                "msg"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                },
+                "msg" : {
+                  "type" : "string"
+                }
+              },
+              "xml" : {
+                "name" : "ResetOwnerPassword"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected Error",
+            "schema" : {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security":[]
+      }
+    },
+    "/owner/register" : {
+      "post": {
+        "tags" : [
+          "owner"
+        ],
+        "summary" : "Register",
+        "description":"Register an Owner",
+        "operationId":"ownerRegister",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The Owner object to be registered",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Owner"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success",
+                "owner",
+                "vehicles"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                },
+                "owner" : {
+                  "$ref" : "#/definitions/Owner"
+                },
+                "vehicles" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/definitions/Vehicle"
+                  },
+                  "xml": {
+                    "name": "vehicle",
+                    "wrapped": true
+                  }
+                }
+              },
+              "xml" : {
+                "name" : "OwnerRegistration"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected Error",
+            "schema" : {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security":[]
+      }
+    },
+    "/owner/update" : {
+      "post": {
+        "tags" : [
+          "owner"
+        ],
+        "summary" : "Update Owner",
+        "description":"",
+        "operationId":"updateOwner",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The Owner object to update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Owner"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success",
+                "owner",
+                "vehicles"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                },
+                "owner" : {
+                  "$ref" : "#/definitions/Owner"
+                },
+                "vehicles" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/definitions/Vehicle"
+                  },
+                  "xml": {
+                    "name" : "vehicle",
+                    "wrapped": true
+                  }
+                }
+              },
+              "xml" : {
+                "name" : "UpdateOwner"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected Error",
+            "schema" : {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security":[
+          {"apiKey": []}
+        ]
+      }
+    },
+    "/owner/permits" : {
+      "get": {
+        "tags" : [
+          "owner", "permit"
+        ],
+        "summary" : "Owner Permits",
+        "description":"Get a list of Permit objects for the Owner",
+        "operationId":"getOwnerPermits",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success",
+                "permits"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                },
+                "permits" : {
+                  "type": "array",
+                  "items" : {
+                    "$ref": "#/definitions/Permit"
+                  },
+                  "xml": {
+                    "name" : "permit",
+                    "wrapped": true
+                  }
+                }
+              },
+              "xml" : {
+                "name" : "GetOwnerPermits"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected Error",
+            "schema" : {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security":[
+          {"apiKey": []}
+        ]
+      }
+    },
+    "/owner/invoices" : {
+      "get": {
+        "tags" : [
+          "owner"
+        ],
+        "summary" : "Invoices for an Owner",
+        "description":"A list of all the Invoices for a specific Owner",
+        "operationId":"getOwnerInvoices",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success",
+                "invoices"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                },
+                "invoices" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref": "#/definitions/Invoice"
+                  },
+                  "xml" : {
+                    "name" : "invoice",
+                    "wrapped": true
+                  }
+                }
+              },
+              "xml" : {
+                "name" : "OwnerInvoices"
+              }
+            }
+          },
+          "400" : {
+            "description": "Invalid Owner"
+          },
+          "404" : {
+            "description": "Owner Invoices not found"
+          }
+        },
+        "security":[
+          {"apiKey": []}
+        ]
+      }
+    },
+    "/owner/storedCards" : {
+      "get" : {
+        "tags" : [
+          "owner","card"
+        ],
+        "summary" : "Stored Cards",
+        "description":"Get an array of the Card objects stored for an Owner",
+        "operationId":"storedCards",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success",
+                "cards"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                },
+                "cards" : {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Card"
+                  },
+                  "xml": {
+                    "name": "card"
+                  }
+                }
+              },
+              "xml" : {
+                "name" : "StoredCards"
+              }
+            }
+          },
+          "400" : {
+            "description": "Invalid request"
+          },
+          "404" : {
+            "description": "Cards not found"
+          }
+        },
+        "security":[
+          {"apiKey": []}
+        ]
+      }
+    },
+    "/owner/vehicles": {
+      "get" : {
+        "tags":[
+          "owner","vehicle"
+        ],
+        "summary":"Returns a list of Vehicles for the logged in Owner",
+        "description":"Returns an array of Vehicles",
+        "operationId":"getOwnerVehicles",
+        "consumes" : [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[],
+        "responses":{
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success",
+                "vehicles"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                },
+                "vehicles" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref": "#/definitions/Vehicle"
+                  },
+                  "xml" : {
+                    "name" : "vehicle",
+                    "wrapped": true
+                  }
+                }
+              },
+              "xml" : {
+                "name" : "OwnerVehicles"
+              }
+            }
+          },
+          "400" : {
+            "description": "Invalid owner"
+          },
+          "404" : {
+            "description": "Vehicles not found"
+          }
+        },
+        "security":[
+          {"apiKey": []}
+        ]
+      }
+    },
+    "/permit/update" : {
+      "post": {
+        "tags" : [
+          "permit"
+        ],
+        "summary" : "Update Permit",
+        "description":"Update a Permit object",
+        "operationId":"updatePermit",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "in": "query",
+            "name": "mpermit_id",
+            "required": true,
+            "type": "integer",
+            "description": "The ID of the Permit object to update"
+          },
+          {
+            "in": "query",
+            "name": "vehicles",
+            "required": true,
+            "type": "string",
+            "description": "The IDs of the Vehicle objects to update"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                }
+              },
+              "xml" : {
+                "name" : "UpdatePermit"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected Error",
+            "schema" : {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security":[
+          {"apiKey": []}
+        ]
+      }
+    },
+    "/permit/list" : {
+      "get": {
+        "tags" : [
+          "permit"
+        ],
+        "summary" : "List Permits",
+        "description":"Get a list of Permits",
+        "operationId":"getPermitList",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success",
+                "permits"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                },
+                "permits" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref": "#/definitions/Permit"
+                  },
+                  "xml" : {
+                    "name" : "permit",
+                    "wrapped": true
+                  }
+                }
+              },
+              "xml" : {
+                "name" : "PermitList"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected Error",
+            "schema" : {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security":[
+          {"apiKey": []}
+        ]
+      }
+    },
+    "/permit/metered" : {
+      "get": {
+        "tags" : [
+          "permit"
+        ],
+        "summary" : "Metered Times by Space",
+        "description":"Get the Permit and a list of Times for a specific parking space",
+        "operationId":"getMeteredPermitsBySpace",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "in": "query",
+            "name": "space",
+            "required": true,
+            "type": "integer",
+            "description": "The ID of the parking space"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success",
+                "permit",
+                "times"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                },
+                "permit" : {
+                  "$ref" : "#/definitions/PermitType"
+                },
+                "times" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/definitions/Time"
+                  },
+                  "xml" : {
+                    "name": "time",
+                    "wrapped": true
+                  }
+                }
+              },
+              "xml" : {
+                "name" : "MeteredPermitSpaceTimes"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected Error",
+            "schema" : {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security":[
+          {"apiKey" : []}
+        ]
+      }
+    },
+    "/permit/meteredPermit" : {
+      "get": {
+        "tags" : [
+          "permit"
+        ],
+        "summary" : "Metered Times by Permit Type",
+        "description":"Get the Permit Type and a list of Times for a specific Permit Type",
+        "operationId":"getMeteredPermitsByPermitType",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "in": "query",
+            "name": "mpermit_type_id",
+            "required": true,
+            "type": "integer",
+            "description": "The ID of the Permit Type"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success",
+                "permit",
+                "times"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                },
+                "permit" : {
+                  "$ref" : "#/definitions/PermitType"
+                },
+                "times" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/definitions/Time"
+                  },
+                  "xml" : {
+                    "name": "time",
+                    "wrapped": true
+                  }
+                }
+              },
+              "xml" : {
+                "name" : "MeteredPermitTypeTimes"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected Error",
+            "schema" : {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security":[
+          {"apiKey" : []}
+        ]
+      }
+    },
+    "/owner/logout" : {
+      "get": {
+        "tags" : [
+          "owner"
+        ],
+        "summary" : "Logout",
+        "description":"Logout the Owner",
+        "operationId":"getOwnerLogout",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[],
+        "responses": {
+          "200": {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "required" : [
+                "success"
+              ],
+              "properties" : {
+                "success" : {
+                  "type" : "boolean"
+                }
+              },
+              "xml" : {
+                "name" : "OwnerLogout"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected Error",
+            "schema" : {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security":[]
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "apiKey" : {
+      "type" : "apiKey",
+      "name" : "X-CSRF-Token",
+      "in" : "header"
+    }
+  },
+  "definitions" : {
+    "Invoice" : {
+      "type" : "object",
+      "required": [
+        "invoice_id",
+        "permit_name",
+        "payment_method",
+        "amount",
+        "period_type",
+        "description"
+      ],
+      "properties":{
+        "create_date": {
+          "type" : "string",
+          "format": "date-time"
+        },
+        "payment_method": {
+          "type" : "string"
+        },
+        "permit_name": {
+          "type" : "string"
+        },
+        "status": {
+          "type" : "string"
+        },
+        "cc_exp_month": {
+          "type" : "string"
+        },
+        "amount": {
+          "type" : "string"
+        },
+        "cc_type": {
+          "type" : "string"
+        },
+        "cc_exp_year": {
+          "type" : "string"
+        },
+        "invoice_id": {
+          "type" : "string"
+        },
+        "type": {
+          "type" : "string"
+        },
+        "cc_type_name": {
+          "type" : "string"
+        },
+        "description": {
+          "type" : "string"
+        },
+        "cc_number": {
+          "type" : "string"
+        },
+        "period_type": {
+          "type" : "string"
+        },
+        "permit_space": {
+          "type" : "string"
+        }
+      },
+      "xml" : {
+        "name" : "Invoice"
+      }
+    },
+    "Vehicle" : {
+      "type" : "object",
+      "required":[
+        "vehicle_id",
+        "owner_id",
+        "license",
+        "alias"
+      ],
+      "properties": {
+        "vehicle_id": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "owner_id": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "license": {
+          "type": "string"
+        },
+        "vin": {
+          "type": "string"
+        },
+        "create_date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "update_date": {
+          "type":"string",
+          "format": "date-time"
+        },
+        "alias": {
+          "type":"string"
+        },
+        "type": {
+          "type":"string"
+        },
+        "extra": {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/VehicleAttribute"
+          },
+          "xml" : {
+            "name" : "vehicle_attribute",
+            "wrapped":true
+          }
+        }
+      },
+      "xml" : {
+        "name" : "Vehicle"
+      }
+    },
+    "VehicleType" : {
+      "type": "object",
+      "required": [
+        "vehicle_type_id",
+        "name"
+      ],
+      "properties": {
+        "vehicle_type_id": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "name": {
+          "type":"string"
+        },
+        "order_value": {
+          "type":"integer",
+          "format":"int64"
+        }
+      },
+      "xml" : {
+        "name" : "VehicleType"
+      }
+  },
+    "VehicleAttribute": {
+      "type" : "object",
+      "required":[
+        "vehicle_attr_id",
+        "vehicle_id",
+        "name",
+        "value"
+      ],
+      "properties": {
+        "vehicle_attr_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "vehicle_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "VehicleAttribute"
+      }
+    },
+    "Owner" : {
+      "type" : "object",
+      "required": [
+        "owner_id",
+        "first_name",
+        "last_name",
+        "email",
+        "username",
+        "password",
+        "notification"
+      ],
+      "properties":{
+        "pbn_token": {
+          "type" : "string"
+        },
+        "notification": {
+          "type" : "string"
+        },
+        "lots": {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Lot"
+          },
+          "xml" : {
+            "name" : "lot",
+            "wrapped": true
+          }
+        },
+        "owner_id": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "status": {
+          "type" : "string"
+        },
+        "type_id": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "first_name": {
+          "type" : "string"
+        },
+        "last_name": {
+          "type" : "string"
+        },
+        "email": {
+          "type" : "string",
+          "format" : "email"
+        },
+        "username": {
+          "type" : "string"
+        },
+        "password": {
+          "type" : "string",
+          "format" : "password"
+        },
+        "home_phone": {
+          "type" : "string"
+        },
+        "mobile_phone": {
+          "type" : "string"
+        },
+        "address": {
+          "type" : "string"
+        },
+        "city": {
+          "type" : "string"
+        },
+        "state_id": {
+          "type" : "string"
+        },
+        "zip": {
+          "type" : "string"
+        },
+        "create_date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "update_date": {
+          "type":"string",
+          "format": "date-time"
+        },
+        "password_updated": {
+          "type":"string",
+          "format": "date-time"
+        },
+        "extra": {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/OwnerAttribute"
+          },
+          "xml" : {
+            "name" : "owner_attribute",
+            "wrapped" : true
+          }
+        }
+      },
+      "xml" : {
+        "name" : "Owner"
+      }
+    },
+    "OwnerAttribute" : {
+      "type" : "object",
+      "required":[
+        "owner_attr_id",
+        "owner_id",
+        "name"
+      ],
+      "properties": {
+        "owner_attr_id": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "owner_id" : {
+          "type":"integer",
+          "format":"int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type":"string"
+        }
+      },
+      "xml" : {
+        "name" : "OwnerAttribute"
+      }
+    },
+    "State": {
+      "type" : "object",
+      "required": [
+        "type",
+        "codeid",
+        "description",
+        "citation_type_id",
+        "is_overtime",
+        "is_other"
+      ],
+      "properties":{
+        "type": {
+          "type": "string"
+        },
+        "codeid": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "citation_type_id": {
+          "type" : "integer",
+          "format": "int64"
+        },
+        "is_overtime": {
+          "type" : "integer",
+          "format": "int64"
+        },
+        "is_other": {
+          "type" : "integer",
+          "format": "int64"
+        },
+        "uuid": {
+          "type": "string",
+          "format" : "uuid"
+        }
+      },
+      "xml": {
+        "name" : "State"
+      }
+    },
+    "Card": {
+      "type" : "object",
+      "required": [
+        "cc_storage_id",
+        "owner_id",
+        "alias",
+        "billing_first_name",
+        "billing_last_name",
+        "billing_address",
+        "billing_city",
+        "billing_state_id",
+        "billing_zip",
+        "cc_number",
+        "cc_type_id",
+        "cc_type",
+        "cc_exp_month",
+        "cc_exp_year"
+      ],
+      "properties":{
+        "cc_storage_id": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "owner_id": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "alias": {
+          "type":"string"
+        },
+        "billing_first_name": {
+          "type":"string"
+        },
+        "billing_last_name": {
+          "type":"string"
+        },
+        "billing_address": {
+          "type":"string"
+        },
+        "billing_city": {
+          "type":"string"
+        },
+        "billing_state_id": {
+          "type":"string"
+        },
+        "billing_zip": {
+          "type":"string"
+        },
+        "cc_number": {
+          "type":"string"
+        },
+        "cc_type_id": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "cc_type": {
+          "$ref" : "#/definitions/CardType"
+        },
+        "cc_exp_month": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "cc_exp_year": {
+          "type":"integer",
+          "format":"int64"
+        }
+      },
+      "xml": {
+        "name" : "Card"
+      }
+    },
+    "CardType": {
+      "type" : "object",
+      "required": [
+        "cc_type_id",
+        "name",
+        "accepted"
+      ],
+      "properties":{
+        "cc_type_id": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "name": {
+          "type":"string"
+        },
+        "accepted": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "image_name": {
+          "type":"string"
+        }
+      },
+      "xml" : {
+        "name" : "CardType"
+      }
+    },
+    "Permit" : {
+      "type" : "object",
+      "required": [
+        "mpermit_id",
+        "owner_id",
+        "mpermit_type_id",
+        "valid_start_date",
+        "valid_end_date",
+        "space",
+        "type",
+        "vehicles",
+        "extra"
+      ],
+      "properties":{
+        "mpermit_id": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "owner_id": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "permit_number": {
+          "type" : "string"
+        },
+        "status": {
+          "type" : "string"
+        },
+        "mpermit_type_id": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "valid_start_date": {
+          "type" : "string",
+          "format": "date-time"
+        },
+        "valid_end_date": {
+          "type" : "string",
+          "format": "date-time"
+        },
+        "create_date": {
+          "type" : "string",
+          "format": "date-time"
+        },
+        "update_date": {
+          "type" : "string",
+          "format": "date-time"
+        },
+        "space": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "privileges": {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Privilege"
+          },
+          "xml" : {
+            "name" : "privilege",
+            "wrapped": true
+          }
+        },
+        "type": {
+          "$ref" : "#/definitions/PermitType"
+        },
+        "vehicles" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Vehicle"
+          },
+          "xml" : {
+            "name" : "vehicle",
+            "wrapped": true
+          }
+        },
+        "extra" : {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PermitAttribute"
+          },
+          "xml": {
+            "name": "permit_attribute",
+            "wrapped": true
+          }
+        }
+      },
+      "xml" : {
+        "name" : "Permit"
+      }
+    },
+    "PermitAttribute": {
+      "type": "object",
+      "required":[
+        "mpermit_attr_id",
+        "mpermit_id",
+        "name",
+        "value"
+      ],
+      "properties": {
+        "mpermit_attr_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "mpermit_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "PermitAttribute"
+      }
+    },
+    "PermitType": {
+      "type" : "object",
+      "required": [
+        "mpermit_type_id",
+        "name",
+        "description"
+      ],
+      "properties":{
+        "mpermit_type_id": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "name": {
+          "type" : "string"
+        },
+        "description": {
+          "type" : "string"
+        },
+        "max_vehicles": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "max_concurrent": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "max_issued": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "period_type": {
+          "type" : "string"
+        },
+        "renewable": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "period_days": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "space_start": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "space_end": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "max_minutes": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "cost": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "requires_shipping": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "can_pickup": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "can_print": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "extra": {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/PermitTypeAttribute"
+          },
+          "xml" : {
+            "name" : "permit_type_attribute",
+            "wrapped": true
+          }
+        },
+        "privileges": {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Privilege"
+          },
+          "xml" : {
+            "name" : "privilege",
+            "wrapped": true
+          }
+        },
+        "expire_notice_days": {
+          "type":"integer",
+          "format":"int64"
+        }
+      },
+      "xml": {
+        "name" : "PermitType"
+      }
+    },
+    "PermitTypeAttribute": {
+      "type" : "object",
+      "required": [
+        "mpermit_type_attr_id",
+        "mpermit_type_id",
+        "name",
+        "value"
+      ],
+      "properties":{
+        "mpermit_type_attr_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "mpermit_type_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value" : {
+          "type": "string"
+        }
+      },
+      "xml" : {
+        "name": "PermitTypeAttribute"
+      }
+    },
+    "Privilege": {
+      "type" : "object",
+      "required": [
+        "type",
+        "codeid",
+        "description",
+        "citation_type_id",
+        "uuid"
+      ],
+      "properties":{
+        "type": {
+          "type" : "string"
+        },
+        "codeid": {
+          "type" : "string"
+        },
+        "description": {
+          "type" : "string"
+        },
+        "citation_type_id": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "is_overtime": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "is_other": {
+          "type":"integer",
+          "format":"int64"
+        },
+        "uuid": {
+          "type" : "string",
+          "format" : "uuid"
+        }
+      },
+      "xml" : {
+        "name": "Privilege"
+      }
+    },
+    "Lot": {
+      "type" : "object",
+      "required": [
+        "lot_id",
+        "number",
+        "description",
+        "is_hub",
+        "URL"
+      ],
+      "properties":{
+        "lot_id": {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "number": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "URL": {
+          "type": "string"
+        },
+        "is_hub": {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      },
+      "xml" : {
+        "name" : "Lot"
+      }
+    },
+    "Time": {
+      "type" : "object",
+      "required": [
+        "mpermit_metered_time_id",
+        "name",
+        "minutes",
+        "price"
+      ],
+      "properties":{
+        "mpermit_metered_time_id": {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "minutes": {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "price" : {
+          "type": "number",
+          "format" : "float"
+        }
+      },
+      "xml" : {
+        "name" : "Time"
+      }
+    },
+    "Error": {
+      "type": "object",
+      "required": [
+        "success",
+        "msg"
+      ],
+      "properties": {
+        "success" : {
+          "type" : "boolean"
+        },
+        "msg" : {
+          "type" : "string"
+        }
+      },
+      "xml" : {
+        "name" : "Error"
+      }
+    }
+  },
+  "externalDocs" : {
+    "description": "Find out more about PayLock",
+    "url": "http://paylock.com"
+  }
+}

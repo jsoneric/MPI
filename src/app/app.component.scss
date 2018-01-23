@@ -1,0 +1,52 @@
+// http://ionicframework.com/docs/v2/theming/
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+@import "../theme/common";
+
+$output-bourbon-deprecation-warnings: false;
+//@import "../../node_modules/bourbon/app/assets/stylesheets/bourbon";
+
+ion-footer {
+    .toolbar {
+        padding: 12px;
+    }
+}
+
+ion-icon {
+    &[class*="custom-"] {
+        // Instead of using the font-based icons
+        // We're applying SVG masks
+        mask-size: contain;
+        mask-position: 50% 50%;
+        mask-repeat: no-repeat;
+        //background: currentColor;
+        width: 1.5em;
+        height: 1.5em;
+    }
+    // custom icons
+    &[class*="custom-icon-visa"] {
+        content: url(../assets/img/visa.svg);
+    }
+    &[class*="custom-icon-mastercard"] {
+        content: url(../assets/img/mastercard.svg);
+    }
+    &[class*="custom-icon-discover"] {
+        content: url(../assets/img/disc.svg);
+    }
+    &[class*="custom-icon-americanexpress"] {
+        content: url(../assets/img/amex.svg);
+    }    
+}

@@ -1,0 +1,6 @@
+@mixin call-to-action-button-styles($background, $color){
+	border-radius: 25px;
+	color: $color;
+	font-size: 1.6rem;
+	font-weight: 500;
+}

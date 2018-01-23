@@ -1,0 +1,51 @@
+pbm-login {
+    .login-content
+	{
+		form 
+		{
+			margin-top: 50px;
+
+			#login-button {
+				border-radius: 30px;
+				padding: 20px;
+			}
+
+			p {
+				font-size: 0.8em;
+				color: #d2d2d2;
+			}
+
+		}
+
+		.alt-options
+		{
+			.button
+			{
+				margin: 0px;
+				padding: 0px;
+				font-size: 1.4rem;
+			}
+
+			.forgot-button
+			{
+				color: $white-d;
+
+				.button-inner
+				{
+					@include justify-content(flex-start);
+				}
+			}
+
+			.signup-button
+			{
+				font-weight: 500;
+				color: $theme-color-2;
+
+				.button-inner
+				{
+					@include justify-content(flex-end);
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ 'VEHICLES.PAGETITLE' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="content">
+  <div class="empty-state-wrapper" *ngIf="vehicles.length == 0">
+    <ion-icon name="car"></ion-icon>
+    <p>{{ 'VEHICLES.NOVEHICLES' | translate }}</p>
+  </div>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let vehicle of vehicles">
+      <ion-item no-lines class="item-text-wrap" (click)="editVehicle(vehicle)">
+        <ion-icon name="car" item-start></ion-icon>
+        <h2 class="item-title">{{ vehicle.alias }}</h2>
+        <div class="item-description">
+          <span>{{ vehicle.state_id }}</span>—<span>{{ vehicle.license }}</span>
+        </div>  
+      </ion-item>    
+      
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="deleteVehicle(vehicle)">
+          <ion-icon name="trash"></ion-icon>
+          <span>{{ 'VEHICLES.BUTTONS.DELETEVEHICLE' | translate }}</span>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>      
+
+</ion-content>
+
+<ion-fab right bottom>
+  <button ion-fab (click)="addNewVehicle()">
+    <ion-icon name="add"></ion-icon>
+  </button>
+</ion-fab>

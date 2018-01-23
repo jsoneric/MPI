@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ 'CREDITCARDS.PAGETITLES.EDITCARD' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="creditCardForm">
+    <!-- Paymentus -->
+    <ion-item>
+      <ion-label floating>{{ 'CREDITCARDS.LABELS.ALIAS' | translate }}</ion-label>
+      <ion-input type="text" formControlName="alias" [(ngModel)]="creditCard.alias"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>{{ 'CREDITCARDS.LABELS.FIRSTNAME' | translate }}</ion-label>
+      <ion-input type="text" formControlName="billing_first_name" [(ngModel)]="creditCard.billing_first_name" placeholder=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>{{ 'CREDITCARDS.LABELS.LASTNAME' | translate }}</ion-label>
+      <ion-input type="text" formControlName="billing_last_name" [(ngModel)]="creditCard.billing_last_name" placeholder=""></ion-input>
+    </ion-item>
+   
+    <!-- credit card number -->
+    <div class="wrapper">
+      <ion-item>
+        <ion-label floating>{{ 'CREDITCARDS.LABELS.CARDNUMBER' | translate }}</ion-label>
+        <ion-input type="text" formControlName="cc_number" [(ngModel)]="creditCard.cc_mask" [readonly]="true"></ion-input>
+      </ion-item>
+    </div>
+
+    <!-- expiration date -->
+    <ion-item>
+      <ion-label floating>{{ 'CREDITCARDS.LABELS.EXPIRATIONDATE' | translate }}</ion-label>
+      <ion-datetime 
+        displayFormat="MM/YY"
+        pickerFormat="MM/YYYY"
+        min="2017"
+        max="2031" 
+        formControlName="cc_exp_date"
+        (ionChange)="setExpirationDate($event)">
+      </ion-datetime>
+    </ion-item>
+        
+    <!-- cvv -->
+    <div class="wrapper">
+      <ion-item>
+        <ion-label floating>{{ 'CREDITCARDS.LABELS.SECURITYCODE' | translate }}</ion-label>
+        <ion-input type="password" formControlName="cvv" [(ngModel)]="creditCard.cvv"></ion-input>
+	    <ion-label>
+		    <div id="spreedlyCvv"></div>
+	    </ion-label>
+      </ion-item>
+      <a class="icon-button" (click)="showCVVInfo()">
+        <ion-icon name="help-circle"></ion-icon>
+      </a>
+    </div>
+
+    <!-- zip code -->
+    <ion-item>
+      <ion-label floating>{{ 'CREDITCARDS.LABELS.ZIPCODE' | translate }}</ion-label>
+      <ion-input type="text" formControlName="billing_zip" [(ngModel)]="creditCard.billing_zip"></ion-input>
+    </ion-item>
+  </form>
+</ion-content>
+
+<ion-footer no-border>
+  <ion-toolbar>
+    <button ion-button round (click)="deleteCard()" color="danger">{{ 'CREDITCARDS.BUTTONS.DELETEBUTTON' | translate }}</button>
+    <button ion-button round (click)="cancel()" color="danger">{{ 'CREDITCARDS.BUTTONS.CANCEL' | translate }}</button>
+    <button ion-button round (click)="save()">{{ 'CREDITCARDS.BUTTONS.SAVE' | translate }}</button>
+  </ion-toolbar>
+</ion-footer>

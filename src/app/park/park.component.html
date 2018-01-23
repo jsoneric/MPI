@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Park</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="parkingSpaceSearchForm">
+    <ion-item>
+      <ion-label floating>Parking Space</ion-label>
+      <ion-input formControlName='space' type="number" [(ngModel)]="space" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+    <button ion-button block round class="parking-spot-search-button" (click)="getPermit()">Search</button>
+  </form>
+
+  <div class="active-permit-wrapper">
+    <h4>Active Parking Sessions</h4>
+    <ion-list>
+        <ion-item *ngFor="let permit of permits" class="item-text-wrap">
+          <h2 class="item-title">{{ permit.alias }}</h2>
+        </ion-item>    
+    </ion-list> 
+  </div>
+</ion-content>

@@ -1,0 +1,1316 @@
+GET /cws/parkbynexus/owner/vehicles HTTP/1.1
+Host: spw-full.citewriteit.com
+Cache-Control: no-cache
+
+{
+  "success": false,
+  "vehicles": [
+    {
+      "vehicle_id": 73,
+      "owner_id": 45,
+      "license": "STF4466",
+      "vin": "",
+      "create_date": "May 18, 2017 3:47:23 PM",
+      "update_date": "May 18, 2017 3:47:23 PM",
+      "alias": "Priiiiuuus",
+      "type": "1",
+      "extra": []
+    },
+    {
+      "vehicle_id": 67,
+      "owner_id": 45,
+      "license": "FTS4466",
+      "vin": "",
+      "create_date": "May 5, 2017 12:48:39 PM",
+      "update_date": "May 5, 2017 12:48:39 PM",
+      "alias": "Vroom Impalla",
+      "type": "1",
+      "extra": []
+    }
+  ]
+}
+
+GET /cws/parkbynexus/owner/storedCards HTTP/1.1
+Host: spw-full.citewriteit.com
+Cache-Control: no-cache
+
+{
+  "success": true,
+  "cards": [
+    {
+      "cc_storage_id": 14,
+      "owner_id": 45,
+      "alias": "CaChing",
+      "billing_first_name": "Papa",
+      "billing_last_name": "Warbucks",
+      "billing_address": "1 Money Street",
+      "billing_city": "New York",
+      "billing_state_id": "NY",
+      "billing_zip": "10009",
+      "cc_number": "411111******1111",
+      "cc_type_id": 1,
+      "cc_type": {
+        "cc_type_id": 1,
+        "name": "Visa",
+        "accepted": 1,
+        "image_name": "visa"
+      },
+      "cc_exp_month": 10,
+      "cc_exp_year": 2017
+    }
+  ]
+}
+
+POST /cws/parkbynexus/owner/storeCard HTTP/1.1
+Host: spw-full.citewriteit.com
+Content-Type: application/x-www-form-urlencoded
+X-CSRF-Token: B36B84B03F28D5E26474D1586BB5CF33
+Cache-Control: no-cache
+
+alias=BlingBling&billing_first_name=Papa&billing_last_name=Warbucks&billing_address=1+Money+Street&billing_city=New+York&billing_state_id=NY&billing_zip=10009&cc_number=4111111111111111&cc_exp_month=10&cc_exp_year=2017&cc_storage_id=0
+
+{
+  "success": true,
+  "card": {
+    "cc_storage_id": 16,
+    "owner_id": 45,
+    "alias": "BlingBling",
+    "billing_first_name": "Papa",
+    "billing_last_name": "Warbucks",
+    "billing_address": "1 Money Street",
+    "billing_city": "New York",
+    "billing_state_id": "NY",
+    "billing_zip": "10009",
+    "cc_number": "411111******1111",
+    "cc_type_id": 1,
+    "cc_type": {
+      "cc_type_id": 1,
+      "name": "Visa",
+      "accepted": 1,
+      "image_name": "visa"
+    },
+    "cc_exp_month": 10,
+    "cc_exp_year": 2017
+  }
+}
+
+POST /cws/parkbynexus/owner/details HTTP/1.1
+Host: spw-full.citewriteit.com
+Content-Type: application/x-www-form-urlencoded
+X-CSRF-Token: B36B84B03F28D5E26474D1586BB5CF33
+Cache-Control: no-cache
+
+{
+  "success": true,
+  "owner": {
+    "pbn_token": "1C0459457724819D061B26337F1511C5",
+    "notification": "Push",
+    "lots": [],
+    "owner_id": 45,
+    "status": "Active",
+    "status_reason": "Approved.",
+    "type_id": 1,
+    "first_name": "Tex",
+    "last_name": "Morgan",
+    "email": "tmorgan@paylock.com",
+    "username": "tmorgan",
+    "password": "UNH66ytkOVOxSO6Sd9aaGA==",
+    "home_phone": "1",
+    "mobile_phone": "2",
+    "address": "3",
+    "city": "4",
+    "state_id": "AK",
+    "zip": "78201",
+    "create_date": "Jan 30, 2017 4:38:51 PM",
+    "update_date": "May 30, 2017 9:21:46 AM",
+    "password_updated": "May 16, 2017 8:56:58 AM",
+    "extra": [
+      {
+        "owner_attr_id": 63,
+        "owner_id": 45,
+        "name": "age",
+        "value": "1"
+      }
+    ]
+  },
+  "permits": [
+    {
+      "mpermit_id": 156,
+      "owner_id": 45,
+      "permit_number": "PRV00001008",
+      "status": "Active",
+      "mpermit_type_id": 24,
+      "valid_start_date": "Jan 30, 2017 12:00:27 PM",
+      "valid_end_date": "Jan 31, 2017 11:59:59 PM",
+      "create_date": "Jan 30, 2017 4:39:27 PM",
+      "update_date": "Jan 30, 2017 4:39:27 PM",
+      "invoice_id": 0,
+      "deleted_by": 0,
+      "space": 0,
+      "privileges": [],
+      "type": {
+        "mpermit_type_id": 24,
+        "name": "Vistor",
+        "description": "10 day visitor permit",
+        "max_vehicles": 2,
+        "max_concurrent": 0,
+        "max_issued": 0,
+        "period_type": "relative",
+        "renewable": 0,
+        "period_days": 1,
+        "space_start": 0,
+        "space_end": 0,
+        "max_minutes": 0,
+        "cost": 0,
+        "requires_shipping": 0,
+        "can_pickup": 0,
+        "can_print": 1,
+        "extra": [],
+        "privileges": [],
+        "expire_notice_days": 0
+      },
+      "vehicles": [],
+      "extra": []
+    }
+  ],
+  "vehicles": [
+    {
+      "vehicle_id": 73,
+      "owner_id": 45,
+      "license": "STF4466",
+      "vin": "",
+      "create_date": "May 18, 2017 3:47:23 PM",
+      "update_date": "May 18, 2017 3:47:23 PM",
+      "alias": "Priiiiuuus",
+      "type": "1",
+      "extra": []
+    },
+    {
+      "vehicle_id": 67,
+      "owner_id": 45,
+      "license": "FTS4466",
+      "vin": "",
+      "create_date": "May 5, 2017 12:48:39 PM",
+      "update_date": "May 5, 2017 12:48:39 PM",
+      "alias": "Vroom Impalla",
+      "type": "1",
+      "extra": []
+    }
+  ]
+}
+
+POST /cws/parkbynexus/owner/register HTTP/1.1
+Host: spw-full.citewriteit.com
+Content-Type: application/x-www-form-urlencoded
+Cache-Control: no-cache
+
+first_name=Tex&last_name=Morgan&email=tmorgan%40paylock.com&username=tmorgan2&password=655321abc&confirm_password=655321abc
+
+{
+  "success": true,
+  "owner": {
+    "pbn_token": "1C0459457724819D061B26337F1511C5",
+    "notification": "Push",
+    "lots": [],
+    "owner_id": 59,
+    "status": "Active",
+    "type_id": 5,
+    "first_name": "Tex",
+    "last_name": "Morgan",
+    "email": "tmorgan@paylock.com",
+    "username": "tmorgan2",
+    "password": "XG8XQ/qoIM+GQ8g4CC4gLQ==",
+    "create_date": "May 30, 2017 9:28:39 AM",
+    "update_date": "May 30, 2017 9:28:39 AM",
+    "password_updated": "May 30, 2017 9:28:39 AM",
+    "extra": []
+  },
+  "vehicles": []
+}
+
+
+/*
+* TODO: Get an Invoice Object
+*/
+GET /cws/parkbynexus/owner/invoices HTTP/1.1
+Host: spw-full.citewriteit.com
+Content-Type: application/x-www-form-urlencoded
+X-CSRF-Token: B36B84B03F28D5E26474D1586BB5CF33
+Cache-Control: no-cache
+
+{
+  "success": true,
+  "invoices": []
+}
+
+POST /cws/parkbynexus/owner/deleteCard?cc_storage_id=16 HTTP/1.1
+Host: spw-full.citewriteit.com
+Content-Type: application/x-www-form-urlencoded
+X-CSRF-Token: B36B84B03F28D5E26474D1586BB5CF33
+Cache-Control: no-cache
+
+{
+  "success": true
+}
+
+/*
+* TODO: Find a valid request, response for this
+*/
+POST /cws/parkbynexus/owner/update HTTP/1.1
+Host: spw-full.citewriteit.com
+Cache-Control: no-cache
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+
+
+/*
+* TODO: Get a Permits Object
+*/
+GET /cws/parkbynexus/owner/permits HTTP/1.1
+Host: spw-full.citewriteit.com
+Content-Type: application/x-www-form-urlencoded
+X-CSRF-Token: B36B84B03F28D5E26474D1586BB5CF33
+Cache-Control: no-cache
+{
+  "success": true,
+  "permits": []
+}
+
+POST /cws/parkbynexus/owner/password?username=tmorgan2 HTTP/1.1
+Host: spw-full.citewriteit.com
+Cache-Control: no-cache
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+
+{
+  "success": true,
+  "msg": "Your password has been sent to your email account."
+}
+
+GET /cws/parkbynexus/permit/list HTTP/1.1
+Host: spw-full.citewriteit.com
+X-CSRF-Token: B36B84B03F28D5E26474D1586BB5CF33
+Cache-Control: no-cache
+
+{
+  "success": true,
+  "permits": [
+    {
+      "mpermit_type_id": 18,
+      "name": "Event - No fee",
+      "description": "Free pass for event",
+      "max_vehicles": 1,
+      "max_concurrent": 0,
+      "max_issued": 0,
+      "period_type": "absolute",
+      "period_start_date": "2016-08-12T00:00:00-0600",
+      "period_end_date": "2016-08-31T23:59:59-0600",
+      "renewable": 0,
+      "period_days": 0,
+      "space_start": 0,
+      "space_end": 0,
+      "max_minutes": 0,
+      "cost": 1,
+      "requires_shipping": 1,
+      "can_pickup": 1,
+      "can_print": 1,
+      "privileges": [
+        {
+          "type": "privilege",
+          "codeid": "A",
+          "description": "A",
+          "citation_type_id": 0,
+          "is_overtime": 0,
+          "is_other": 0,
+          "uuid": "04e59d98-fea5-4e8f-9be2-1e4dc59d5b3f"
+        }
+      ],
+      "expire_notice_days": 0
+    },
+    {
+      "mpermit_type_id": 23,
+      "name": "Winter 2017",
+      "description": "Winter 2017 Student",
+      "max_vehicles": 1,
+      "max_concurrent": 0,
+      "max_issued": 0,
+      "period_type": "absolute",
+      "period_start_date": "2017-01-01T00:00:00-0700",
+      "period_end_date": "2017-05-31T23:59:59-0600",
+      "renewable": 0,
+      "period_days": 0,
+      "space_start": 0,
+      "space_end": 0,
+      "max_minutes": 0,
+      "cost": 25,
+      "requires_shipping": 1,
+      "can_pickup": 1,
+      "can_print": 1,
+      "privileges": [
+        {
+          "type": "privilege",
+          "codeid": "Y",
+          "description": "Y",
+          "citation_type_id": 0,
+          "is_overtime": 0,
+          "is_other": 0,
+          "uuid": "3a217560-0b7d-4bbf-a4a6-f3ab504d3722"
+        }
+      ],
+      "expire_notice_days": 0
+    },
+    {
+      "mpermit_type_id": 24,
+      "name": "Vistor",
+      "description": "10 day visitor permit",
+      "max_vehicles": 2,
+      "max_concurrent": 0,
+      "max_issued": 0,
+      "period_type": "relative",
+      "renewable": 0,
+      "period_days": 1,
+      "space_start": 0,
+      "space_end": 0,
+      "max_minutes": 0,
+      "cost": 0,
+      "requires_shipping": 0,
+      "can_pickup": 0,
+      "can_print": 1,
+      "privileges": [],
+      "expire_notice_days": 0
+    },
+    {
+      "mpermit_type_id": 29,
+      "name": "Summer 2017",
+      "description": "Summer 2017 student",
+      "max_vehicles": 3,
+      "max_concurrent": 2,
+      "max_issued": 0,
+      "period_type": "absolute",
+      "period_start_date": "2016-03-10T00:00:00-0700",
+      "period_end_date": "2017-05-31T23:59:59-0600",
+      "renewable": 1,
+      "period_days": 0,
+      "space_start": 0,
+      "space_end": 0,
+      "max_minutes": 0,
+      "cost": 0,
+      "requires_shipping": 1,
+      "can_pickup": 1,
+      "can_print": 1,
+      "privileges": [
+        {
+          "type": "privilege",
+          "codeid": "26AG",
+          "description": "26AG",
+          "citation_type_id": 0,
+          "is_overtime": 0,
+          "is_other": 0,
+          "uuid": "53e0bbab-dc9f-45d5-9455-d5dd6549757e"
+        },
+        {
+          "type": "privilege",
+          "codeid": "30S-ACGY",
+          "description": "30S-ACGY",
+          "citation_type_id": 0,
+          "is_overtime": 0,
+          "is_other": 0,
+          "uuid": "b62874e5-7704-483f-a255-0e918b27402a"
+        },
+        {
+          "type": "privilege",
+          "codeid": "34-9AGY",
+          "description": "34-9AGY",
+          "citation_type_id": 0,
+          "is_overtime": 0,
+          "is_other": 0,
+          "uuid": "ba4cd548-a940-463a-8b11-6c5877164467"
+        },
+        {
+          "type": "privilege",
+          "codeid": "GC",
+          "description": "GC",
+          "citation_type_id": 0,
+          "is_overtime": 0,
+          "is_other": 0,
+          "uuid": "d60f65dd-637a-4cbc-acb8-fcd7776b1b0f"
+        },
+        {
+          "type": "privilege",
+          "codeid": "O",
+          "description": "O",
+          "citation_type_id": 0,
+          "is_overtime": 0,
+          "is_other": 0,
+          "uuid": "8b982fcb-2d0d-49df-ad59-182f0b51a3aa"
+        }
+      ],
+      "expire_notice_days": 15
+    },
+    {
+      "mpermit_type_id": 31,
+      "name": "public 2017",
+      "description": "public area permit",
+      "max_vehicles": 1,
+      "max_concurrent": 0,
+      "max_issued": 0,
+      "period_type": "absolute",
+      "period_start_date": "2017-03-01T00:00:00-0700",
+      "period_end_date": "2017-03-13T23:59:59-0600",
+      "renewable": 1,
+      "period_days": 0,
+      "space_start": 0,
+      "space_end": 0,
+      "max_minutes": 0,
+      "cost": 2,
+      "prorate_type": "daily",
+      "requires_shipping": 1,
+      "can_pickup": 1,
+      "can_print": 0,
+      "privileges": [
+        {
+          "type": "privilege",
+          "codeid": "Y",
+          "description": "Y",
+          "citation_type_id": 0,
+          "is_overtime": 0,
+          "is_other": 0,
+          "uuid": "3a217560-0b7d-4bbf-a4a6-f3ab504d3722"
+        },
+        {
+          "type": "privilege",
+          "codeid": "YC",
+          "description": "YC",
+          "citation_type_id": 0,
+          "is_overtime": 0,
+          "is_other": 0,
+          "uuid": "38481521-5fe2-4bf6-b340-ba18ff0e5951"
+        },
+        {
+          "type": "privilege",
+          "codeid": "37Y",
+          "description": "37Y",
+          "citation_type_id": 0,
+          "is_overtime": 0,
+          "is_other": 0,
+          "uuid": "7331ad39-333a-49d9-a8cd-eaed987b8f2c"
+        }
+      ],
+      "expire_notice_days": 0
+    }
+  ]
+}
+
+POST /cws/parkbynexus/permit/update?mpermit_id=255&amp;vehicles={
+    "vehicle_id": 80,
+    "owner_id": 45,
+    "license": "123abc1",
+    "create_date": "May 31, 2017 2:46:19 PM",
+    "update_date": "May 31, 2017 2:46:19 PM",
+    "alias": "fjdisonfeio",
+    "type": "1",
+    "extra": []
+  } HTTP/1.1
+Host: spw-full.citewriteit.com
+X-CSRF-Token: B36B84B03F28D5E26474D1586BB5CF33
+Cache-Control: no-cache
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+{
+  "success": true
+}
+
+/*
+ * TODO : Find a valid request, response
+ */
+GET /cws/parkbynexus/permit/metered HTTP/1.1
+Host: spw-full.citewriteit.com
+X-CSRF-Token: B36B84B03F28D5E26474D1586BB5CF33
+Cache-Control: no-cache
+
+{
+  "success": false,
+  "msg": "Invalid space provided."
+}
+
+/*
+ * TODO : Find a valid request, response
+ */
+GET /cws/parkbynexus/permit/meteredPermit HTTP/1.1
+Host: spw-full.citewriteit.com
+X-CSRF-Token: B36B84B03F28D5E26474D1586BB5CF33
+Cache-Control: no-cache
+
+{
+  "success": false,
+  "msg": "Invalid space provided."
+}
+
+/*
+ * TODO : Find a valid request, response
+ */
+POST /cws/parkbynexus/permit/purchaseTime HTTP/1.1
+Host: spw-full.citewriteit.com
+X-CSRF-Token: B36B84B03F28D5E26474D1586BB5CF33
+Cache-Control: no-cache
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+404 page
+
+/*
+ * TODO : Find a valid request, response
+ */
+POST /cws/parkbynexus/permit/purchase HTTP/1.1
+Host: spw-full.citewriteit.com
+X-CSRF-Token: B36B84B03F28D5E26474D1586BB5CF33
+Cache-Control: no-cache
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+404 page
+
+POST /cws/parkbynexus/vehicle/save HTTP/1.1
+Host: spw-full.citewriteit.com
+Cache-Control: no-cache
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="alias"
+
+Vroom Impalla
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="license"
+
+FTS4466
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="state"
+
+TX
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="vin"
+
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="type"
+
+1
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="vehicle_id"
+
+0
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+{
+  "success": true,
+  "vehicle": {
+    "vehicle_id": 77,
+    "owner_id": 45,
+    "license": "FTS4466",
+    "vin": "",
+    "create_date": "May 30, 2017 9:48:49 AM",
+    "update_date": "May 30, 2017 9:48:49 AM",
+    "alias": "Vroom Impalla",
+    "type": "1",
+    "extra": []
+  }
+}
+
+
+/*
+ * TODO : Find a valid request, response
+ */
+POST /cws/parkbynexus/vehicle/delete HTTP/1.1
+Host: spw-full.citewriteit.com
+Cache-Control: no-cache
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+{
+  "success": false,
+  "msg": "Unknown error deleting vehicle."
+}
+
+POST /cws/parkbynexus/doLogin?j_username=tmorgan&amp;j_password=RD3AFI HTTP/1.1
+Host: spw-full.citewriteit.com
+Content-Type: application/x-www-form-urlencoded
+Cache-Control: no-cache
+
+
+{
+  "success": true,
+  "owner": {
+    "pbn_token": "CD7025A7551E17D4C2B6ABDB53F8A0B1",
+    "notification": "Push",
+    "lots": [],
+    "owner_id": 45,
+    "status": "Active",
+    "status_reason": "Approved.",
+    "type_id": 1,
+    "first_name": "Tex",
+    "last_name": "Morgan",
+    "email": "tmorgan@paylock.com",
+    "username": "tmorgan",
+    "password": "UNH66ytkOVOxSO6Sd9aaGA==",
+    "home_phone": "1",
+    "mobile_phone": "2",
+    "address": "3",
+    "city": "4",
+    "state_id": "AK",
+    "zip": "78201",
+    "create_date": "Jan 30, 2017 4:38:51 PM",
+    "update_date": "May 30, 2017 9:50:22 AM",
+    "password_updated": "May 16, 2017 8:56:58 AM",
+    "extra": [
+      {
+        "owner_attr_id": 63,
+        "owner_id": 45,
+        "name": "age",
+        "value": "1"
+      }
+    ]
+  },
+  "vehicles": [
+    {
+      "vehicle_id": 77,
+      "owner_id": 45,
+      "license": "FTS4466",
+      "vin": "",
+      "create_date": "May 30, 2017 9:48:49 AM",
+      "update_date": "May 30, 2017 9:48:49 AM",
+      "alias": "Vroom Impalla",
+      "type": "1",
+      "extra": []
+    },
+    {
+      "vehicle_id": 73,
+      "owner_id": 45,
+      "license": "STF4466",
+      "vin": "",
+      "create_date": "May 18, 2017 3:47:23 PM",
+      "update_date": "May 18, 2017 3:47:23 PM",
+      "alias": "Priiiiuuus",
+      "type": "1",
+      "extra": []
+    },
+    {
+      "vehicle_id": 67,
+      "owner_id": 45,
+      "license": "FTS4466",
+      "vin": "",
+      "create_date": "May 5, 2017 12:48:39 PM",
+      "update_date": "May 5, 2017 12:48:39 PM",
+      "alias": "Vroom Impalla",
+      "type": "1",
+      "extra": []
+    }
+  ]
+}
+
+GET /cws/parkbynexus/list/all HTTP/1.1
+Host: spw-full.citewriteit.com
+Cache-Control: no-cache
+
+{
+  "success": true,
+  "lots": [
+    {
+      "lot_id": 1,
+      "number": "1024",
+      "description": "Nexus network",
+      "URL": "http://spw-full.citewriteit.com/cws",
+      "is_hub": 1
+    }
+  ],
+  "states": [
+    {
+      "type": "state",
+      "codeid": "AL",
+      "description": "Alabama",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "D707C45A-C1F5-43FA-B979-89E53E975ABC"
+    },
+    {
+      "type": "state",
+      "codeid": "AK",
+      "description": "Alaska",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "B1102C4D-BE29-4849-B1EA-A0BC0AF9EA25"
+    },
+    {
+      "type": "state",
+      "codeid": "AZ",
+      "description": "Arizona",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "586E5B90-6427-4A96-8ECE-CF2878F8AC0D"
+    },
+    {
+      "type": "state",
+      "codeid": "AR",
+      "description": "Arkansas",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "C4BC7007-2760-4CF3-873C-08DB16AADB17"
+    },
+    {
+      "type": "state",
+      "codeid": "CA",
+      "description": "California",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "B18C7C3E-5EC1-4EDE-9745-AC203CA44E02"
+    },
+    {
+      "type": "state",
+      "codeid": "CN",
+      "description": "Canada",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "E6D840F2-8848-46DF-8E03-AC0AD88ECD5F"
+    },
+    {
+      "type": "state",
+      "codeid": "CO",
+      "description": "Colorado",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "32E34630-ABA0-4426-B44E-39BD353725E1"
+    },
+    {
+      "type": "state",
+      "codeid": "CT",
+      "description": "Connecticut",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "8FCA568E-4C73-41FC-8640-1BCE68695B9A"
+    },
+    {
+      "type": "state",
+      "codeid": "DE",
+      "description": "Delaware",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "C237330C-B0A9-4EB1-B819-5C2CB5EFD73D"
+    },
+    {
+      "type": "state",
+      "codeid": "DC",
+      "description": "District of Columbia",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "5D94984F-0F91-47FD-96AD-977944BEC3C4"
+    },
+    {
+      "type": "state",
+      "codeid": "FL",
+      "description": "Florida",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "224E0B55-F7B1-40A1-BC07-A15EC9EFACA8"
+    },
+    {
+      "type": "state",
+      "codeid": "GA",
+      "description": "Georgia",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "5E3B0DE3-739D-41B7-908A-3972630EBC41"
+    },
+    {
+      "type": "state",
+      "codeid": "HI",
+      "description": "Hawaii",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "82AC423B-543B-4B64-88CD-910A16EE0C20"
+    },
+    {
+      "type": "state",
+      "codeid": "ID",
+      "description": "Idaho",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "323CA50C-7202-4E6B-9637-44CB84113EC2"
+    },
+    {
+      "type": "state",
+      "codeid": "IL",
+      "description": "Illinois",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "1319BA04-10B4-450E-9677-EA6D12B91DEA"
+    },
+    {
+      "type": "state",
+      "codeid": "IN",
+      "description": "Indiana",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "2B4DE74C-A42A-4598-8A86-9E78BBE0E6FE"
+    },
+    {
+      "type": "state",
+      "codeid": "IA",
+      "description": "Iowa",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "ECA872B0-2813-4749-B792-6B8A5DB33E98"
+    },
+    {
+      "type": "state",
+      "codeid": "KS",
+      "description": "Kansas",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "C4CE3BBB-7474-4EA7-936C-8DB8B15B9262"
+    },
+    {
+      "type": "state",
+      "codeid": "KY",
+      "description": "Kentucky",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "3A05DB0F-B752-43EB-8145-42644251581B"
+    },
+    {
+      "type": "state",
+      "codeid": "LA",
+      "description": "Louisiana",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "C1FE23B0-747F-4DEB-8893-3301EE78F801"
+    },
+    {
+      "type": "state",
+      "codeid": "ME",
+      "description": "Maine",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "FC1DB28C-34D1-433F-B5EC-F781091415E4"
+    },
+    {
+      "type": "state",
+      "codeid": "MD",
+      "description": "Maryland",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "2CFD628A-50FB-4F7C-A0A6-B19CF964B24E"
+    },
+    {
+      "type": "state",
+      "codeid": "MA",
+      "description": "Massachusetts",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "00794208-FD59-4B2E-A0A8-305DEAB410DF"
+    },
+    {
+      "type": "state",
+      "codeid": "MX",
+      "description": "Mexico",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "26D8D177-01FD-41F3-8C24-A5998D1AF368"
+    },
+    {
+      "type": "state",
+      "codeid": "MI",
+      "description": "Michigan",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "4C99F874-7999-4B6A-A435-1D365E2CB13C"
+    },
+    {
+      "type": "state",
+      "codeid": "MN",
+      "description": "Minnesota",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "C32F5387-F3B1-43C8-AED7-FA8FEEE7F0EC"
+    },
+    {
+      "type": "state",
+      "codeid": "MS",
+      "description": "Mississippi",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "116231D7-81BF-47B4-AB9E-4BC97F66E10F"
+    },
+    {
+      "type": "state",
+      "codeid": "MO",
+      "description": "Missouri",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "D950F938-3120-403A-9C46-6F013B032A99"
+    },
+    {
+      "type": "state",
+      "codeid": "MT",
+      "description": "Montana",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "D69BE564-2141-4AF1-9BC3-66620058F966"
+    },
+    {
+      "type": "state",
+      "codeid": "Moro",
+      "description": "MoroniCallejasElBigShot",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "e084a353-9a81-4823-a238-f392f99d5722"
+    },
+    {
+      "type": "state",
+      "codeid": "NE",
+      "description": "Nebraska",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "BA9323DC-EED5-4C2A-B3EC-7E429599C560"
+    },
+    {
+      "type": "state",
+      "codeid": "NV",
+      "description": "Nevada",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "39DB4AB0-59E3-4968-8201-6598A8AA45EC"
+    },
+    {
+      "type": "state",
+      "codeid": "NH",
+      "description": "New Hampshire",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "7AC9EE26-24C0-4386-AA90-064137A3926D"
+    },
+    {
+      "type": "state",
+      "codeid": "NJ",
+      "description": "New Jersey",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "DFE8D758-D46F-4E31-A69B-427DE515415F"
+    },
+    {
+      "type": "state",
+      "codeid": "NM",
+      "description": "New Mexico",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "2BFB1540-8B65-4094-B408-043EB86C6496"
+    },
+    {
+      "type": "state",
+      "codeid": "NY",
+      "description": "New York",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "4C76C002-E3EF-49F5-A5F9-6A47E5325A4C"
+    },
+    {
+      "type": "state",
+      "codeid": "NC",
+      "description": "North Carolina",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "65A82A3B-BA3C-4FFA-9140-E267373CA8A4"
+    },
+    {
+      "type": "state",
+      "codeid": "ND",
+      "description": "North Dakota",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "E4B49802-8088-41C9-9CC1-9A7FAD281D74"
+    },
+    {
+      "type": "state",
+      "codeid": "OH",
+      "description": "Ohio",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "9B71D9BF-BDA8-4205-82AA-21FDAEF93843"
+    },
+    {
+      "type": "state",
+      "codeid": "OK",
+      "description": "Oklahoma",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "251CCD87-F2E1-4234-858D-D51571F7B056"
+    },
+    {
+      "type": "state",
+      "codeid": "OR",
+      "description": "Oregon",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "390E1910-68FD-4B05-A37C-DCC17A0295F0"
+    },
+    {
+      "type": "state",
+      "codeid": "OT",
+      "description": "Other",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 1,
+      "uuid": "5e00880d-6284-40c0-a32b-81d80f49a41a"
+    },
+    {
+      "type": "state",
+      "codeid": "PA",
+      "description": "Pennsylvania",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "58F5B10C-B389-42D5-96D7-78E892F32D08"
+    },
+    {
+      "type": "state",
+      "codeid": "PR",
+      "description": "Puerto Rico",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "563AF897-6D6C-42A5-A130-A1A81E0BA55B"
+    },
+    {
+      "type": "state",
+      "codeid": "RI",
+      "description": "Rhode Island",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "44723881-CF4C-4C9A-BAD9-DD4608B49168"
+    },
+    {
+      "type": "state",
+      "codeid": "SC",
+      "description": "South Carolina",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "81E49DA4-5D3B-4764-BC57-060C4D0134B8"
+    },
+    {
+      "type": "state",
+      "codeid": "SD",
+      "description": "South Dakota",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "61C99911-D986-4DB8-8097-0F716E925359"
+    },
+    {
+      "type": "state",
+      "codeid": "TN",
+      "description": "Tennessee",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "5FAED70A-6F62-4D7D-AE0E-A4671545F96E"
+    },
+    {
+      "type": "state",
+      "codeid": "TX",
+      "description": "Texas",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "485418BE-B868-4A0C-8AE4-AC79CBB5498C"
+    },
+    {
+      "type": "state",
+      "codeid": "UT",
+      "description": "Utah",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "32E1071C-414E-4297-A1B8-575E5585473E"
+    },
+    {
+      "type": "state",
+      "codeid": "VT",
+      "description": "Vermont",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "15456300-84F0-4AE9-AAF5-F220DDBD6337"
+    },
+    {
+      "type": "state",
+      "codeid": "VA",
+      "description": "Virginia",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "B103A1AC-78DC-460A-ACD7-42DDA06290DD"
+    },
+    {
+      "type": "state",
+      "codeid": "WA",
+      "description": "Washington",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "1633A13E-7071-4EA6-9F6E-524F8716A7A6"
+    },
+    {
+      "type": "state",
+      "codeid": "WV",
+      "description": "West Virginia",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "81AF185C-AEBD-439A-90F8-27FC094B33D1"
+    },
+    {
+      "type": "state",
+      "codeid": "WI",
+      "description": "Wisconsin",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "6E9B376C-0DEC-41E7-8C0C-8729684BBE76"
+    },
+    {
+      "type": "state",
+      "codeid": "WM",
+      "description": "WMT",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 1,
+      "uuid": "839C487F-04A5-496C-B870-CD870745032A"
+    },
+    {
+      "type": "state",
+      "codeid": "WY",
+      "description": "Wyoming",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "7be845f5-cfdc-480b-8761-6f2dbd9c1d67"
+    },
+    {
+      "type": "state",
+      "codeid": "ZZZZ",
+      "description": "ZZZZ description",
+      "citation_type_id": 0,
+      "is_overtime": 0,
+      "is_other": 0,
+      "uuid": "0aa78313-dbf4-4da7-b065-a6e977b56c4d"
+    }
+  ],
+  "vehicle_types": [
+    {
+      "vehicle_type_id": 1,
+      "name": "Car",
+      "order_value": 1
+    },
+    {
+      "vehicle_type_id": 2,
+      "name": "Truck",
+      "order_value": 1
+    },
+    {
+      "vehicle_type_id": 3,
+      "name": "Motorcycle",
+      "order_value": 3
+    },
+    {
+      "vehicle_type_id": 4,
+      "name": "Other",
+      "order_value": 4
+    }
+  ]
+}
+
+GET /cws/parkbynexus/owner/logout HTTP/1.1
+Host: spw-full.citewriteit.com
+Content-Type: application/x-www-form-urlencoded
+X-CSRF-Token: 275EF978346FF42C5A0F80D3643B0CA5
+Cache-Control: no-cache
+
+{
+  "success": true
+}
+
+
+
+
+Targets
+    Occurrences of '/parkbynexus' in Project
+Found Occurrences  (21 usages found)
+    Usage in string constants  (21 usages found)
+        citewrite-paybymobile  (21 usages found)
+            www\js  (8 usages found)
+                credit-cards.component.js  (2 usages found)
+                    46 url: Config.server_url + '/parkbynexus/owner/deleteCard',
+                    147 url: Config.server_url + '/parkbynexus/owner/storeCard',
+                park.component.js  (2 usages found)
+                    212 url: lot.URL + '/parkbynexus/permit/purchase',
+                    322 url: lot.URL + '/parkbynexus/permit/purchaseTime',
+                permits.component.js  (1 usage found)
+                    257 url: lot.URL + '/parkbynexus/permit/purchase',
+                services.js  (1 usage found)
+                    65 $http.get(this.server_url + '/parkbynexus/list/all', {
+                vehicles.component.js  (2 usages found)
+                    33 url: Config.server_url + '/parkbynexus/vehicle/delete',
+                    101 url: Config.server_url + '/parkbynexus/vehicle/save',
+            www\js\data  (13 usages found)
+                owner.js  (9 usages found)
+                    21 $http.get(Config.server_url + '/parkbynexus/owner/logout', {
+                    60 url: Config.server_url + '/parkbynexus/doLogin',
+                    98 url: Config.server_url + '/parkbynexus/owner/details',
+                    135 url: Config.server_url + '/parkbynexus/owner/password',
+                    174 url: Config.server_url + '/parkbynexus/owner/register',
+                    205 url: Config.server_url + '/parkbynexus/owner/update',
+                    287 var prom = $http.get(value.URL + '/parkbynexus/owner/permits', {
+                    391 var prom = $http.get(value.URL + '/parkbynexus/owner/invoices', {
+                    426 url: Config.server_url + '/parkbynexus/owner/storedCards',
+                permit.js  (4 usages found)
+                    34 url: lot.URL + '/parkbynexus/permit/update',
+                    72 url: lot.URL + '/parkbynexus/permit/list',
+                    122 url: lot.URL + '/parkbynexus/permit/metered',
+                    183 url: lot.URL + '/parkbynexus/permit/meteredPermit',

@@ -1,0 +1,72 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Purchase Parking Time</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <div class="title-wrapper">
+        <div class="permit-title">{{ permit.name }}</div>
+        <span class="permit-type">{{ permit.description }}</span>        
+    </div>  
+  
+    <form [formGroup]="parkingDetails">
+  
+      <!--Vehicle-->
+      <ion-item>
+        <ion-label floating>Vehicle</ion-label>
+        <ion-select 
+          formControlName='vehicle' 
+          (ionChange)="selectChange($event)" 
+          interface="popover">
+          
+          <ion-option *ngFor="let v of vehicles" [value]="v">{{ v.alias }}</ion-option>
+          <ion-option>Add a vehicle</ion-option>
+        </ion-select>
+      </ion-item>  
+  
+      <ion-row *ngIf="permit.mpermit_id != 0">
+        <ion-col col-7 no-padding>
+            <ion-item>
+                <ion-label floating>Time</ion-label>
+                <ion-select 
+                  formControlName='time'
+                  [(ngModel)]='selectedTime'
+                  interface="popover"
+                  (ionChange)="timeChange()">
+                  
+                  <ion-option *ngFor="let t of times" [value]="t">{{ t.name }}</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-col>
+        <ion-col col-5 no-padding>
+            <ion-item class="cost">
+                <ion-label floating>Cost</ion-label>
+                <ion-input [readonly]="true" [value]="'$ '+price"></ion-input>
+            </ion-item>
+        </ion-col>
+      </ion-row>
+          
+      <!--Payment-->
+      <ion-item *ngIf="permit.mpermit_id != 0">
+        <ion-label floating>Credit Card</ion-label>
+        <ion-select 
+          formControlName='card' 
+          (ionChange)="selectChange($event)" 
+          interface="popover">
+  
+          <ion-option *ngFor="let c of cards" [value]="c">{{ c.alias }}</ion-option>
+          <ion-option>Add a credit card</ion-option>
+        </ion-select>
+      </ion-item> 
+    </form>
+  </ion-content>
+  
+  <ion-footer no-border>
+      <ion-toolbar>
+          <button ion-button round block [disabled]="!parkingDetails.valid" (click)="purchase()">Purchase Parking</button>
+        </ion-toolbar>
+  </ion-footer>

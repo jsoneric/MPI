@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ 'CREDITCARDS.PAGETITLES.MAINTITLE' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="content">
+	<div class="empty-state-wrapper" *ngIf="cards.length == 0">
+		<ion-icon name="car"></ion-icon>
+		<p>{{ 'CREDITCARDS.NOCARDS' | translate }}</p>
+	</div>	
+  <ion-list>
+		<ion-item-sliding *ngFor="let card of cards">
+			<ion-item no-lines class="item-text-wrap" (click)="editCard(card)">
+				<ion-icon [name]="'custom-icon-'+card.cc_type.image_name" item-start></ion-icon>
+				<h2 class="item-title">{{ card.alias }}</h2>
+				<div class="item-description">
+					<span>{{ card.cc_number }}</span>
+				</div>  
+			</ion-item>    
+			
+			<ion-item-options side="right">
+				<button ion-button color="danger" (click)="deleteCard(card)">
+					<ion-icon name="trash"></ion-icon>
+					<span>{{ 'CREDITCARDS.BUTTONS.DELETEBUTTON' | translate }}</span>
+				</button>
+			</ion-item-options>
+		</ion-item-sliding>
+	</ion-list> 
+</ion-content>
+
+<ion-fab right bottom>
+	<button ion-fab (click)="addNewCard()">
+		<ion-icon name="add"></ion-icon>
+	</button>
+</ion-fab>

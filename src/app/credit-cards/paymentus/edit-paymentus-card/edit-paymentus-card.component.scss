@@ -1,0 +1,41 @@
+pbm-edit-paymentus-card {
+    .wrapper {
+        display: block;
+        position: relative;
+
+        .icon-button {
+            color: $black-d;
+            height: 4.4rem;
+            margin: 0px;
+            padding: 0px 6px;
+            position: absolute;
+            right: 1px;
+            text-align: right;
+            top: 25px;
+            width: 6rem;
+
+            ion-icon {
+                height: 4.4rem;
+                line-height: 4.4rem;
+                font-size: 2.4rem;
+            }
+        }    
+    }
+
+    .item {
+        padding-left: 0;
+    }    
+
+    ion-toolbar {
+        text-align: center;
+
+        .toolbar-background-md {
+            border: 0px;
+            background: #ffffff;
+        }
+
+        button {
+            min-width: 128px;
+        }
+    }    
+}

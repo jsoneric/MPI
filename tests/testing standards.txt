@@ -1,0 +1,15 @@
+﻿Currently, tests are broken down into two categories: acceptance and unit.
+
+Unit tests utilize Jasmine, Karma, and TestBed.
+
+Acceptance tests utilize Protractor and Postman.
+
+Useful links:
+
+https://angular.io/guide/testing#!#testing-intro
+https://www.joshmorony.com/how-to-unit-test-an-ionic-2-application/
+https://www.joshmorony.com/introduction-to-testing-ionic-2-applications-with-testbed/
+https://www.joshmorony.com/test-driven-development-in-ionic-2-an-introduction-to-tdd/
+
+http://www.protractortest.org/#/
+https://www.getpostman.com/docs/postman/scripts/test_scripts
